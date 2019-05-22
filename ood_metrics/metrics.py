@@ -61,14 +61,15 @@ def detection_error(preds, labels):
             True binary labels in range {0, 1} or {-1, 1}.
     """
     fpr, tpr, _ = roc_curve(labels, preds)
-
-    # Get the index of the first TPR that is >= 95%
-    idx = next(i for i, x in enumerate(tpr) if x>=0.95)
+        
+    # Get indexes of all TPR >= 95%
+    idxs = [i for i, x in enumerate(tpr) if x>=0.95]
     
-    t = tpr[idx]
-    f = fpr[idx]
+    # Calc error for a given threshold (i.e. idx)
+    _detection_error = lambda idx: 0.5 * (1 - tpr[idx]) + 0.5 * fpr[idx]
     
-    return 0.5 * (1 - t) + 0.5 * f
+    # Return the minimum detection error such that TPR >= 0.95
+    return min(map(_detection_error, idxs))
     
 
 def calc_metrics(predictions, labels):
