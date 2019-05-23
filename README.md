@@ -1,6 +1,6 @@
-# OOD Metrics
+# OOD Detection Metrics
 
-Functions for computing commonly used metrics in the field of OOD detection.
+Functions for computing metrics commonly used in the field of out-of-distribution (OOD) detection.
 
 ## Installation
 
