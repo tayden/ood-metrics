@@ -2,6 +2,7 @@ from sklearn.metrics import roc_curve, auc, precision_recall_curve
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def auroc(preds, labels):
     """Calculate and return the area under the ROC curve using unthresholded predictions on the data and a binary true label.
     
