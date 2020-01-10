@@ -60,14 +60,20 @@ def detection_error(preds, labels):
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
+            Negatives are assumed to be labelled as 1
     """
     fpr, tpr, _ = roc_curve(labels, preds)
-        
+
+    # Get ratios of positives to negatives
+    neg_ratio = sum(np.array(labels) == 1) / len(labels)
+    pos_ratio = 1 - neg_ratio
+
     # Get indexes of all TPR >= 95%
     idxs = [i for i, x in enumerate(tpr) if x>=0.95]
     
     # Calc error for a given threshold (i.e. idx)
-    _detection_error = lambda idx: 0.5 * (1 - tpr[idx]) + 0.5 * fpr[idx]
+    # Calc is the (# of negatives * FNR) + (# of positives * FPR)
+    _detection_error = lambda idx: neg_ratio * (1 - tpr[idx]) + pos_ratio * fpr[idx]
     
     # Return the minimum detection error such that TPR >= 0.95
     return min(map(_detection_error, idxs))
@@ -85,12 +91,13 @@ def calc_metrics(predictions, labels):
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
+            Negative samples are expected to have a label of 1.
     """
     
     return {
         'fpr_at_95_tpr': fpr_at_95_tpr(predictions, labels),
         'detection_error': detection_error(predictions, labels),
         'auroc': auroc(predictions, labels),
-        'aupr_in': aupr(predictions, labels),
-        'aupr_out': aupr([-a for a in predictions], [1 - a for a in labels])
+        'aupr_out': aupr(predictions, labels),
+        'aupr_in': aupr([-a for a in predictions], [1 - a for a in labels])
     }
