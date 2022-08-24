@@ -19,6 +19,6 @@ def test_fpr_at_95_tpr():
 
 def test_detection_error():
     assert detection_error([0.1, 0.2, 0.3, 0.4], [0, 0, 1, 1]) == 0.0
-    assert round(detection_error(list(range(100)), [1]*97 + [0]*3), 2) == 0.03
-    assert round(detection_error(list(range(100)), [1]*96 + [0]*4), 2) == 0.04
+    assert round(detection_error(list(range(100)), [1]*3 + [0]*97), 2) == 0.03
+    assert round(detection_error(list(range(100)), [1]*4 + [0]*96), 2) == 0.04
     assert round(detection_error(list(range(10000)), [i%2 for i in range(10000)]), 2) == 0.5

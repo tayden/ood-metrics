@@ -2,42 +2,51 @@ from sklearn.metrics import roc_curve, auc, precision_recall_curve
 import numpy as np
 
 
-def auroc(preds, labels):
+def auroc(preds, labels, pos_label = 1):
     """Calculate and return the area under the ROC curve using unthresholded predictions on the data and a binary true label.
     
     preds: array, shape = [n_samples]
-           Target scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           Target normality scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           i.e.: an high value means sample predicted "normal", belonging to the positive class
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
+
+    pos_label: label of the positive class (1 by default)
     """
-    fpr, tpr, _ = roc_curve(labels, preds)
+    fpr, tpr, _ = roc_curve(labels, preds, pos_label=pos_label)
     return auc(fpr, tpr)
 
 
-def aupr(preds, labels):
+def aupr(preds, labels, pos_label = 1):
     """Calculate and return the area under the Precision Recall curve using unthresholded predictions on the data and a binary true label.
     
     preds: array, shape = [n_samples]
-           Target scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           Target normality scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           i.e.: an high value means sample predicted "normal", belonging to the positive class
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
+
+    pos_label: label of the positive class (1 by default)
     """
-    precision, recall, _ = precision_recall_curve(labels, preds)
+    precision, recall, _ = precision_recall_curve(labels, preds, pos_label=pos_label)
     return auc(recall, precision)
 
 
-def fpr_at_95_tpr(preds, labels):
+def fpr_at_95_tpr(preds, labels, pos_label = 1):
     """Return the FPR when TPR is at minimum 95%.
         
     preds: array, shape = [n_samples]
-           Target scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           Target normality scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           i.e.: an high value means sample predicted "normal", belonging to the positive class
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
+
+    pos_label: label of the positive class (1 by default)
     """
-    fpr, tpr, _ = roc_curve(labels, preds)
+    fpr, tpr, _ = roc_curve(labels, preds, pos_label=pos_label)
     
     if all(tpr < 0.95):
         # No threshold allows TPR >= 0.95
@@ -51,21 +60,23 @@ def fpr_at_95_tpr(preds, labels):
         return np.interp(0.95, tpr, fpr)
 
 
-def detection_error(preds, labels):
+def detection_error(preds, labels, pos_label = 1):
     """Return the misclassification probability when TPR is 95%.
         
     preds: array, shape = [n_samples]
-           Target scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           Target normality scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           i.e.: an high value means sample predicted "normal", belonging to the positive class
            
     labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
-            Negatives are assumed to be labelled as 1
+
+    pos_label: label of the positive class (1 by default)
     """
-    fpr, tpr, _ = roc_curve(labels, preds)
+    fpr, tpr, _ = roc_curve(labels, preds, pos_label=pos_label)
 
     # Get ratios of positives to negatives
-    neg_ratio = sum(np.array(labels) == 1) / len(labels)
-    pos_ratio = 1 - neg_ratio
+    pos_ratio = sum(np.array(labels) == pos_label) / len(labels)
+    neg_ratio = 1 - pos_ratio
 
     # Get indexes of all TPR >= 95%
     idxs = [i for i, x in enumerate(tpr) if x>=0.95]
@@ -78,7 +89,7 @@ def detection_error(preds, labels):
     return min(map(_detection_error, idxs))
     
 
-def calc_metrics(predictions, labels):
+def calc_metrics(predictions, labels, pos_label = 1):
     """Using predictions and labels, return a dictionary containing all novelty
     detection performance statistics.
     
@@ -86,17 +97,19 @@ def calc_metrics(predictions, labels):
     Reliability Of Out-of-Distribution Image Detection In Neural Networks'.
     
         preds: array, shape = [n_samples]
-           Target scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           Target normality scores, can either be probability estimates of the positive class, confidence values, or non-thresholded measure of decisions.
+           i.e.: an high value means sample predicted "normal", belonging to the positive class
            
-    labels: array, shape = [n_samples]
+        labels: array, shape = [n_samples]
             True binary labels in range {0, 1} or {-1, 1}.
-            Negative samples are expected to have a label of 1.
+
+        pos_label: label of the positive class (1 by default)
     """
     
     return {
-        'fpr_at_95_tpr': fpr_at_95_tpr(predictions, labels),
-        'detection_error': detection_error(predictions, labels),
-        'auroc': auroc(predictions, labels),
-        'aupr_out': aupr(predictions, labels),
-        'aupr_in': aupr([-a for a in predictions], [1 - a for a in labels])
+        'fpr_at_95_tpr': fpr_at_95_tpr(predictions, labels, pos_label=pos_label),
+        'detection_error': detection_error(predictions, labels, pos_label=pos_label),
+        'auroc': auroc(predictions, labels, pos_label=pos_label),
+        'aupr_in': aupr(predictions, labels, pos_label=pos_label),
+        'aupr_out': aupr([-a for a in predictions], [1 - a for a in labels], pos_label=pos_label)
     }
