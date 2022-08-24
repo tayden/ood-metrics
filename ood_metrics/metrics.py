@@ -1,8 +1,8 @@
-from sklearn.metrics import roc_curve, auc, precision_recall_curve
 import numpy as np
+from sklearn.metrics import auc, precision_recall_curve, roc_curve
 
 
-def auroc(preds, labels, pos_label = 1):
+def auroc(preds, labels, pos_label=1):
     """Calculate and return the area under the ROC curve using unthresholded predictions on the data and a binary true label.
     
     preds: array, shape = [n_samples]
@@ -18,7 +18,7 @@ def auroc(preds, labels, pos_label = 1):
     return auc(fpr, tpr)
 
 
-def aupr(preds, labels, pos_label = 1):
+def aupr(preds, labels, pos_label=1):
     """Calculate and return the area under the Precision Recall curve using unthresholded predictions on the data and a binary true label.
     
     preds: array, shape = [n_samples]
@@ -34,7 +34,7 @@ def aupr(preds, labels, pos_label = 1):
     return auc(recall, precision)
 
 
-def fpr_at_95_tpr(preds, labels, pos_label = 1):
+def fpr_at_95_tpr(preds, labels, pos_label=1):
     """Return the FPR when TPR is at minimum 95%.
         
     preds: array, shape = [n_samples]
@@ -47,20 +47,20 @@ def fpr_at_95_tpr(preds, labels, pos_label = 1):
     pos_label: label of the positive class (1 by default)
     """
     fpr, tpr, _ = roc_curve(labels, preds, pos_label=pos_label)
-    
+
     if all(tpr < 0.95):
         # No threshold allows TPR >= 0.95
         return 0
-    elif all(tpr >= 0.95):    
+    elif all(tpr >= 0.95):
         # All thresholds allow TPR >= 0.95, so find lowest possible FPR
-        idxs = [i for i, x in enumerate(tpr) if x>=0.95]
+        idxs = [i for i, x in enumerate(tpr) if x >= 0.95]
         return min(map(lambda idx: fpr[idx], idxs))
     else:
         # Linear interp between values to get FPR at TPR == 0.95
         return np.interp(0.95, tpr, fpr)
 
 
-def detection_error(preds, labels, pos_label = 1):
+def detection_error(preds, labels, pos_label=1):
     """Return the misclassification probability when TPR is 95%.
         
     preds: array, shape = [n_samples]
@@ -79,17 +79,17 @@ def detection_error(preds, labels, pos_label = 1):
     neg_ratio = 1 - pos_ratio
 
     # Get indexes of all TPR >= 95%
-    idxs = [i for i, x in enumerate(tpr) if x>=0.95]
-    
+    idxs = [i for i, x in enumerate(tpr) if x >= 0.95]
+
     # Calc error for a given threshold (i.e. idx)
     # Calc is the (# of negatives * FNR) + (# of positives * FPR)
     _detection_error = lambda idx: neg_ratio * (1 - tpr[idx]) + pos_ratio * fpr[idx]
-    
+
     # Return the minimum detection error such that TPR >= 0.95
     return min(map(_detection_error, idxs))
-    
 
-def calc_metrics(predictions, labels, pos_label = 1):
+
+def calc_metrics(predictions, labels, pos_label=1):
     """Using predictions and labels, return a dictionary containing all novelty
     detection performance statistics.
     
@@ -105,7 +105,7 @@ def calc_metrics(predictions, labels, pos_label = 1):
 
         pos_label: label of the positive class (1 by default)
     """
-    
+
     return {
         'fpr_at_95_tpr': fpr_at_95_tpr(predictions, labels, pos_label=pos_label),
         'detection_error': detection_error(predictions, labels, pos_label=pos_label),

@@ -24,7 +24,8 @@ print(auroc(scores, labels))
 
 ### AUPR
 
-Calculate and return the area under the Precision Recall curve using unthresholded predictions on the data and a binary true label.
+Calculate and return the area under the Precision Recall curve using unthresholded predictions on the data and a binary true
+label.
 
 ```python
 from ood_metrics import aupr
