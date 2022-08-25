@@ -185,6 +185,17 @@ tomli = ">=1.0.0"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "pytest-readme"
+version = "1.0.0"
+description = "Test your README.md file"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pytest = "*"
+
+[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -269,7 +280,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8,<3.10"
-content-hash = "db20ebbd13fe117ae6129bb81ee162d118a169b4e3968036dc64cb655e02c5f9"
+content-hash = "0065cabc3594cb0381a86ec254a06cac3418613c09f4f9cfe167dd904323310b"
 
 [metadata.files]
 atomicwrites = []
@@ -300,6 +311,7 @@ py = [
 ]
 pyparsing = []
 pytest = []
+pytest-readme = []
 python-dateutil = []
 scikit-learn = []
 scipy = []

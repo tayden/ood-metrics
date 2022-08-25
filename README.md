@@ -20,8 +20,7 @@ from ood_metrics import auroc
 labels = [0, 0, 0, 1, 0]
 scores = [0.1, 0.3, 0.6, 0.9, 1.3]
 
-print(auroc(scores, labels))
-# 0.75
+assert auroc(scores, labels) == 0.75
 ```
 
 ### AUPR
@@ -35,8 +34,7 @@ from ood_metrics import aupr
 labels = [0, 0, 0, 1, 0]
 scores = [0.1, 0.3, 0.6, 0.9, 1.3]
 
-print(aupr(scores, labels))
-# 0.25
+assert aupr(scores, labels) == 0.25
 ```
 
 ### FPR @ 95% TPR
@@ -49,8 +47,7 @@ from ood_metrics import fpr_at_95_tpr
 labels = [0, 0, 0, 1, 0]
 scores = [0.1, 0.3, 0.6, 0.9, 1.3]
 
-print(fpr_at_95_tpr(scores, labels))
-# 0.25
+assert fpr_at_95_tpr(scores, labels) == 0.25
 ```
 
 ### Detection Error
@@ -63,8 +60,7 @@ from ood_metrics import detection_error
 labels = [0, 0, 0, 1, 0]
 scores = [0.1, 0.3, 0.6, 0.9, 1.3]
 
-print(detection_error(scores, labels))
-# 0.125
+assert detection_error(scores, labels) == 0.05
 ```
 
 ### Calculate all stats
@@ -77,14 +73,13 @@ from ood_metrics import calc_metrics
 labels = [0, 0, 0, 1, 0]
 scores = [0.1, 0.3, 0.6, 0.9, 1.3]
 
-print(calc_metrics(scores, labels))
-# {
-#     'fpr_at_95_tpr': 0.25,
-#     'detection_error': 0.125,
-#     'auroc': 0.75,
-#     'aupr_in': 0.25,
-#     'aupr_out': 0.94375
-# }
+assert calc_metrics(scores, labels) == {
+    'fpr_at_95_tpr': 0.25,
+    'detection_error': 0.05,
+    'auroc': 0.75,
+    'aupr_in': 0.25,
+    'aupr_out': 0.94375
+}
 ```
 
 ## Plotting functions
@@ -94,6 +89,7 @@ print(calc_metrics(scores, labels))
 Plot an ROC curve based on unthresholded predictions and true binary labels.
 
 ```python
+
 from ood_metrics import plot_roc
 
 labels = [0, 0, 0, 1, 0]
@@ -108,6 +104,7 @@ plot_roc(scores, labels)
 Plot an Precision-Recall curve based on unthresholded predictions and true binary labels.
 
 ```python
+
 from ood_metrics import plot_pr
 
 labels = [0, 0, 0, 1, 0]
@@ -122,6 +119,7 @@ plot_pr(scores, labels)
 Plot a visualization showing inliers and outliers sorted by their prediction of novelty.
 
 ```python
+
 from ood_metrics import plot_barcode
 
 labels = [0, 0, 0, 1, 0]

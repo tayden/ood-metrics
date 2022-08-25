@@ -106,3 +106,6 @@ venv.bak/
 # IDE files
 .idea
 .vscode
+
+# pytests
+test_readme.py
