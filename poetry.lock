@@ -513,20 +513,6 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
-name = "pytest-readme"
-version = "1.0.1"
-description = "Test your README.md file"
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pytest-readme-1.0.1.tar.gz", hash = "sha256:9ee3f0317c57eface38678f838f08db22256f034e7fd0629fbdcd3f8db47afd7"},
-]
-
-[package.dependencies]
-pytest = "*"
-
-[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -662,4 +648,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8,<3.11"
-content-hash = "b0eb4d51aea9a0cf1f8f844d21b7f9ffa0402843f28b9afd5782a35900afb4cd"
+content-hash = "4d1ae4c6bab777caf0bcaa8c7b17363bd5dd3d95028e1620f88afd7d472ca582"
