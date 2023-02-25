@@ -14,7 +14,13 @@ Functions for computing metrics commonly used in the field of out-of-distributio
 
 ## Installation
 
+### With PIP
+
 `pip install ood-metrics`
+
+### With Conda
+
+`conda install -c conda-forge ood-metrics`
 
 ## Metrics functions
 
