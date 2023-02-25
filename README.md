@@ -7,16 +7,12 @@ Functions for computing metrics commonly used in the field of out-of-distributio
 <img height="19px" alt="Tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
 </a>
 
-<a href="https://pypi.org/project/ood-metrics/">
-<img height="19px" alt="PyPI version" src="https://badge.fury.io/py/ood_metrics.svg" />
+<a href="https://github.com/HakaiInstitute/ood-metrics/blob/main/LICENSE.txt">
+    <img alt="License" src="https://anaconda.org/conda-forge/ood-metrics/badges/license.svg" height="20px" />
 </a>
 
 <a href="https://anaconda.org/conda-forge/ood-metrics">
     <img alt="Version" src="https://anaconda.org/conda-forge/ood-metrics/badges/version.svg" height="20px" />
-</a>
-
-<a href="https://github.com/HakaiInstitute/ood-metrics/blob/main/LICENSE.txt">
-    <img alt="License" src="https://anaconda.org/conda-forge/ood-metrics/badges/license.svg" height="20px" />
 </a>
 </div>
 
