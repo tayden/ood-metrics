@@ -4,7 +4,7 @@ Functions for computing metrics commonly used in the field of out-of-distributio
 
 <div style="overflow: hidden; display: flex; justify-content:flex-start; gap:10px;">
 <a href="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml">
-<img height="19px" alt="tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
+<img height="19px" alt="Tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
 </a>
 
 <a href="https://pypi.org/project/ood-metrics/">
