@@ -2,7 +2,15 @@
 
 Functions for computing metrics commonly used in the field of out-of-distribution (OOD) detection.
 
-[![tests](https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/tayden/ood-metrics/actions/workflows/tests.yml)
+<div style="overflow: hidden; display: flex; justify-content:flex-start; gap:10px;">
+<a href="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml">
+<img height="19px" alt="tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
+</a>
+
+<a href="https://pypi.org/project/ood-metrics/">
+<img height="19px" alt="PyPI version" src="https://badge.fury.io/py/ood_metrics.svg" />
+</a>
+</div>
 
 ## Installation
 
