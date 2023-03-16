@@ -2,11 +2,29 @@
 
 Functions for computing metrics commonly used in the field of out-of-distribution (OOD) detection.
 
-[![tests](https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/tayden/ood-metrics/actions/workflows/tests.yml)
+<div style="overflow: hidden; display: flex; justify-content:flex-start; gap:10px;">
+<a href="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml">
+<img height="19px" alt="Tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
+</a>
+
+<a href="https://github.com/HakaiInstitute/ood-metrics/blob/main/LICENSE.txt">
+    <img alt="License" src="https://anaconda.org/conda-forge/ood-metrics/badges/license.svg" height="20px" />
+</a>
+
+<a href="https://anaconda.org/conda-forge/ood-metrics">
+    <img alt="Version" src="https://anaconda.org/conda-forge/ood-metrics/badges/version.svg" height="20px" />
+</a>
+</div>
 
 ## Installation
 
+### With PIP
+
 `pip install ood-metrics`
+
+### With Conda
+
+`conda install -c conda-forge ood-metrics`
 
 ## Metrics functions
 

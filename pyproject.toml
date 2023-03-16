@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ood-metrics"
-version = "1.1.0"
+version = "0.0.0"
 description = "Calculate common OOD detection metrics"
 authors = ["Taylor Denouden <taylordenouden@gmail.com>"]
 license = "MIT"
