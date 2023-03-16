@@ -7,7 +7,7 @@ Functions for computing metrics commonly used in the field of out-of-distributio
 <img height="19px" alt="Tests" src="https://github.com/tayden/ood-metrics/actions/workflows/tests.yml/badge.svg" />
 </a>
 
-<a href="https://github.com/HakaiInstitute/ood-metrics/blob/main/LICENSE.txt">
+<a href="https://github.com/tayden/ood-metrics/blob/main/LICENSE">
     <img alt="License" src="https://anaconda.org/conda-forge/ood-metrics/badges/license.svg" height="20px" />
 </a>
 
