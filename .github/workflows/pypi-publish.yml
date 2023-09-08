@@ -41,4 +41,5 @@ jobs:
         POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
       run: |
         poetry version ${{ env.tag }}
+        echo "__version__ = '${{ env.tag }}\n'" >> ./ood_metrics/__init__.py
         poetry publish --build
