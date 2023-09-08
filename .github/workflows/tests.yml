@@ -26,7 +26,6 @@ jobs:
         py:
           - "3.10"
           - "3.9"
-          - "3.8"
     steps:
       - uses: actions/checkout@v3
       - name: Setup python for test ${{ matrix.py }}
@@ -37,7 +36,7 @@ jobs:
       - name: Setup Poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: 1.3.2
+          poetry-version: 1.6.1
 
       - name: Install dependencies
         run: |
