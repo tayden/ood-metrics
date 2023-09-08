@@ -24,6 +24,7 @@ jobs:
           - Windows
           - MacOs
         py:
+          - "3.11"
           - "3.10"
           - "3.9"
     steps:
